@@ -1,8 +1,10 @@
 main = require('../main')
 event = require('./event.json')
-
+console.log('call')
 completion = (error, result)  => {
+    console.log(process.env)
     console.log(error)
     console.log(result)
 }
-main.main(event, null, completion)
+
+main.call(event, null, completion)

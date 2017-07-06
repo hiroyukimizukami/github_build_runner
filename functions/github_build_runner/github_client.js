@@ -9,11 +9,11 @@ class GithubClient {
     }
 
     getPullRequest(number, completion, failure) {
-        var param = _create_base_params()
+        var param = this._create_base_params()
         param.method = 'GET'
-        parms.path = util.format('/repos/%s/%s/pulls/%s', this.username, this.repo, number)
+        param.path = util.format('/repos/%s/%s/pulls/%s', this.username, this.repo, number)
 
-        var req = https.request(option, (response) => {
+        var req = https.request(param, (response) => {
             if (!/^20/.test(response.statusCode)) {
                 return failure(new Error('repsonse_code:' + response.statusCode))
             }
@@ -37,7 +37,7 @@ class GithubClient {
     _create_base_params() {
         return {
             headers: {
-                "Authorization": util.format('Basic %s', credential),
+                "Authorization": this._create_authorized_value(),
                 "Accept": '*/*',
                 "User-Agent": 'github_build_hook/0.0.1'
             },
@@ -52,4 +52,4 @@ class GithubClient {
     }
 }
 
-exports.create = (repo, username, token) => { new GithubClient(repo, username, token) }
+exports.create = (repo, username, token) => { return new GithubClient(repo, username, token) }
