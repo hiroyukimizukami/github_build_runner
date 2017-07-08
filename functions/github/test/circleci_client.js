@@ -11,7 +11,7 @@ describe('build', () => {
     let rev = '07f0609498a483e7d6c9ab8b3c2f7379bf45d8cb'
     let client = CircleCIClient.create(repo, username, token)
     let httpClient = MockHttpClient.create()
-    let path = util.format('api/v1.1/project/%s/%s/%s?circle-token=%s', 'github', username, repo, token)
+    let path = util.format('/api/v1.1/project/%s/%s/%s?circle-token=%s', 'github', username, repo, token)
     client.client = httpClient
     client.build(rev, () => {}, () => {})
 
