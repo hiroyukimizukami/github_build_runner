@@ -6,7 +6,6 @@ class HttpClient {
     }
 
     request(param, payload, completion, failure) {
-        console.log(payload)
         let req = this.https.request(param, (response) => {
             if (!/^20/.test(response.statusCode)) {
                 return failure(new Error('repsonse_code:' + response.statusCode))
@@ -18,7 +17,6 @@ class HttpClient {
             })
             response.on('end', () => {
                 let body = Buffer.concat(data).toString()
-                console.log(body)
                 completion(JSON.parse(body))
             })
             response.on('error', (error) => {

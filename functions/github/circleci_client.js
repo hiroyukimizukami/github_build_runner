@@ -26,7 +26,7 @@ class CircleCIClient {
 
     _create_base_params(body) {
         return {
-            hreaders: {
+            headers: {
                 "Content-Type" : "application/json",
                 "Content-Length" : Buffer.byteLength(body)
             },
