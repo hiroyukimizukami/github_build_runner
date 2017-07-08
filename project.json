@@ -1,5 +1,5 @@
 {
-    "name": "github_build_runner",
+    "name": "build_runner",
     "description": "AWS Lambda function to build via github webhooks",
     "environment": {}
 }
