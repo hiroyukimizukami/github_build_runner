@@ -8,7 +8,7 @@ class MockHttps {
 
     request(param, callback) {
         this.param = param
-        var response = new MockResponse(this.response_status, this.response_body, this.error)
+        let response = new MockResponse(this.response_status, this.response_body, this.error)
 
         if (callback) {
             callback(response)

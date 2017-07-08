@@ -1,7 +1,6 @@
-https = require('https')
-IssueCommentEvent = require('./issue_comment_event')
-GithubClient = require('./github_client')
-config = require('./config')
+let IssueCommentEvent = require('./issue_comment_event')
+let GithubClient = require('./github_client')
+let config = require('./config')
 
 exports.call = (e, context, callback) => {
     let event = IssueCommentEvent.create(e)

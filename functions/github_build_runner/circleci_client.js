@@ -1,5 +1,5 @@
-var util = require('util')
-var https = require('https')
+let util = require('util')
+let https = require('https')
 
 class CircleCIClient {
     constructor(token) {

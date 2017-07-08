@@ -1,7 +1,7 @@
-main = require('../main')
-event = require('./event.json')
+let main = require('../main')
+let event = require('./event.json')
 
-completion = (error, result)  => {
+let completion = (error, result)  => {
     console.log(error)
     console.log(result)
 }

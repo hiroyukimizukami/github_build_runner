@@ -1,5 +1,5 @@
-var util = require('util')
-var https = require('https')
+let util = require('util')
+let https = require('https')
 
 class GithubClient {
     constructor(repo, username, token) {
@@ -14,7 +14,7 @@ class GithubClient {
         param.method = 'GET'
         param.path = util.format('/repos/%s/%s/pulls/%s', this.username, this.repo, number)
 
-        var req = this.https.request(param, (response) => {
+        let req = this.https.request(param, (response) => {
             if (!/^20/.test(response.statusCode)) {
                 return failure(new Error('repsonse_code:' + response.statusCode))
             }
@@ -24,8 +24,7 @@ class GithubClient {
                 data.push(chunk)
             })
             response.on('end', () => {
-                var body = Buffer.concat(data).toString()
-                completion(JSON.parse(body))
+                completion(JSON.parse(Buffer.concat(data).toString()))
             })
             response.on('error', (error) => {
                 failure(error)
@@ -48,7 +47,7 @@ class GithubClient {
     }
 
     _create_authorized_value() {
-        var c = new Buffer(util.format('%s:%s', this.username, this.token)).toString('base64')
+        let c = new Buffer(util.format('%s:%s', this.username, this.token)).toString('base64')
         return util.format('Basic %s', c)
     }
 }
