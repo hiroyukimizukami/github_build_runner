@@ -6,4 +6,4 @@ class IssueCommentEvent {
     }
 }
 
-exports.create = (event) => { new IssueCommentEvent(event) }
+exports.create = (event) => { return new IssueCommentEvent(event) }

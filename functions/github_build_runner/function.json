@@ -1,0 +1,10 @@
+{
+    "name": "github_build_runner",
+    "description": "AWS Lambda function to build via github webhooks",
+    "memory": 128,
+    "timeout": 5,
+    "role": "arn:aws:iam::936459717092:role/github_build_runner_lambda_function"
+    "hooks": {
+        "build": "/bin/sh bin/setup"
+    }
+}
