@@ -15,8 +15,6 @@ class CircleCIClient {
         param.method = 'POST'
         param.path = util.format('/api/v1.1/project/%s/%s/%s?circle-token=%s', 'github', this.username, this.repo, this.token)
 
-        console.log(param)
-        console.log(body)
         this.client.request(param, body, completion, failure)
     }
 
