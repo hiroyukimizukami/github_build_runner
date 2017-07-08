@@ -8,5 +8,5 @@ dependencies:
 
 test:
   override:
-    - cwd functions/github_build_runner/
+    - cd functions/github_build_runner/
     - mocha
