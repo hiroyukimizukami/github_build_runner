@@ -15,7 +15,7 @@ class CircleCIClient {
         param.method = 'POST'
         param.path = util.format('api/v1.1/project/%s/%s/%s/?circle-token=%s', 'gh', this.username, this.repo, this.token)
 
-        this.client.request(param, completion, failure)
+        this.client.request(param, body, completion, failure)
     }
 
     _create_body(rev) {
