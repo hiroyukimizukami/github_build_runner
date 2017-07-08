@@ -2,7 +2,7 @@ let util = require('util')
 let HttpClient = require('./http_client')
 
 class CircleCIClient {
-    constructor(username, repo, token) {
+    constructor(repo, username, token) {
         this.username = username
         this.repo = repo
         this.token = token
@@ -39,4 +39,4 @@ class CircleCIClient {
 
 }
 
-exports.create = (username, repo, token) => { return new CircleCIClient(username, repo, token) }
+exports.create = (repo, username, token) => { return new CircleCIClient(repo, username, token) }
