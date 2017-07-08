@@ -8,5 +8,4 @@ dependencies:
 
 test:
   override:
-    - cd functions/github_build_runner/
-    - mocha
+    - cd functions/github_build_runner/ && npm test
