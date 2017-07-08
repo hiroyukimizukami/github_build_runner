@@ -15,6 +15,8 @@ class CircleCIClient {
         param.method = 'POST'
         param.path = util.format('api/v1.1/project/%s/%s/%s/?circle-token=%s', 'gh', this.username, this.repo, this.token)
 
+        console.log(param)
+        console.log(body)
         this.client.request(param, body, completion, failure)
     }
 
@@ -37,4 +39,4 @@ class CircleCIClient {
 
 }
 
-exports.create = (token) => { return new CircleCIClient(token) }
+exports.create = (username, repo, token) => { return new CircleCIClient(username, repo, token) }
