@@ -13,7 +13,7 @@ class CircleCIClient {
         let body = this._create_body(rev)
         var param = this._create_base_params(body)
         param.method = 'POST'
-        param.path = util.format('api/v1.1/project/%s/%s/%s/?circle-token=%s', 'github', this.username, this.repo, this.token)
+        param.path = util.format('api/v1.1/project/%s/%s/%s?circle-token=%s', 'github', this.username, this.repo, this.token)
 
         console.log(param)
         console.log(body)
