@@ -7,5 +7,6 @@ dependencies:
     - npm install -g mocha
 
 test:
-  - cwd functions/github_build_runner/
-  - mocha
+  override:
+    - cwd functions/github_build_runner/
+    - mocha
