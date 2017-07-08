@@ -6,6 +6,7 @@ class GithubClient {
         this.repo = repo
         this.username = username
         this.token = token
+        this.https = https
     }
 
     getPullRequest(number, completion, failure) {
@@ -13,7 +14,7 @@ class GithubClient {
         param.method = 'GET'
         param.path = util.format('/repos/%s/%s/pulls/%s', this.username, this.repo, number)
 
-        var req = https.request(param, (response) => {
+        var req = this.https.request(param, (response) => {
             if (!/^20/.test(response.statusCode)) {
                 return failure(new Error('repsonse_code:' + response.statusCode))
             }
