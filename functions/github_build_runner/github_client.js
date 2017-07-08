@@ -1,37 +1,19 @@
 let util = require('util')
-let https = require('https')
+let HttpClient = require('./http_client')
 
 class GithubClient {
     constructor(repo, username, token) {
         this.repo = repo
         this.username = username
         this.token = token
-        this.https = https
+        this.client = HttpClient.create()
     }
 
     getPullRequest(number, completion, failure) {
         var param = this._create_base_params()
         param.method = 'GET'
         param.path = util.format('/repos/%s/%s/pulls/%s', this.username, this.repo, number)
-
-        let req = this.https.request(param, (response) => {
-            if (!/^20/.test(response.statusCode)) {
-                return failure(new Error('repsonse_code:' + response.statusCode))
-            }
-            var data = []
-
-            response.on('data', (chunk) => {
-                data.push(chunk)
-            })
-            response.on('end', () => {
-                completion(JSON.parse(Buffer.concat(data).toString()))
-            })
-            response.on('error', (error) => {
-                failure(error)
-            })
-        })
-
-        req.end()
+        this.client.request(param, null, completion, failure)
     }
 
     _create_base_params() {
@@ -41,7 +23,7 @@ class GithubClient {
                 "Accept": '*/*',
                 "User-Agent": 'github_build_hook/0.0.1'
             },
-            host: 'api.github.com',
+            hostname: 'api.github.com',
             port: 443
         }
     }

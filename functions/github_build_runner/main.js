@@ -1,14 +1,26 @@
 let IssueCommentEvent = require('./issue_comment_event')
 let GithubClient = require('./github_client')
+let CircleCIClient = require('./circleci_client')
+let HookRules = require('./hook_rules')
 let config = require('./config')
 
 exports.call = (e, context, callback) => {
     let event = IssueCommentEvent.create(e)
-    let githubClient = GithubClient.create(config.repo, config.username, process.env.GITHUB_TOKEN)
+    let github = GithubClient.create(config.repo, config.username, process.env.GITHUB_TOKEN)
+    let circleci = GithubClient.create(config.repo, config.username, process.env.CIRCLECI__TOKEN)
 
-    githubClient.getPullRequest(event.issueNumber, (pullRequest) => {
-        console.log(pullRequest.head.sha)
+    if (!HookRules.shouldBuild(e.comment.body)) {
         callback(null, { status: 0 })
+        return
+    }
+
+    github.getPullRequest(event.issueNumber, (pullRequest) => {
+        circleci.build(pullRequest.head.sha, (response) => {
+            console.log(response.build_url)
+            callback(null, { status: 0 })
+        }, (error) => {
+            callback(error, { status : 1})
+        })
     }, (error) => {
         callback(error, { status : 1})
     })
