@@ -26,7 +26,7 @@ class HttpClient {
             })
         })
 
-        if (body) req.write(payload)
+        if (payload) req.write(payload)
         req.end()
     }
 }
