@@ -5,7 +5,7 @@ class HttpClient {
         this.https = https
     }
 
-    request(param, body, completion, failure) {
+    request(param, payload, completion, failure) {
         let req = this.https.request(param, (response) => {
             if (!/^20/.test(response.statusCode)) {
                 return failure(new Error('repsonse_code:' + response.statusCode))
@@ -16,14 +16,15 @@ class HttpClient {
                 data.push(chunk)
             })
             response.on('end', () => {
-                completion(JSON.parse(Buffer.concat(data).toString()))
+                let body = Buffer.concat(data).toString()
+                completion(JSON.parse(body))
             })
             response.on('error', (error) => {
                 failure(error)
             })
         })
 
-        if (body) req.write(body)
+        if (payload) req.write(payload)
         req.end()
     }
 }
